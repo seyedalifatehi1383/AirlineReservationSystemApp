@@ -188,13 +188,18 @@ public class Menus {
             switch (choose) {
                 case "0":
                     return ;
-
                 case "1":
                     adminMenuMethods.addFlights(flightsArrayList);
-
+                    break;
                 case "2":
-
-
+                    adminMenuMethods.updateFlights(flightsArrayList);
+                    break;
+                case "3":
+                    adminMenuMethods.removeFlights(flightsArrayList);
+                    break;
+                case "4":
+                    adminMenuMethods.flightSchedules(flightsArrayList);
+                    break;
                 default:
                     System.out.println("Please check your command!");
                     System.out.println("Press Enter To Continue...");
