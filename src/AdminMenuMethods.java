@@ -21,7 +21,7 @@ public class AdminMenuMethods {
             String flightId = input.nextLine();
             for (Flights flights : flightsArrayList) {
                 if (Objects.equals(flightId, flights.getFlightId())) {
-                    System.out.println("\nThis flightId already exists. Please enter another flightID!");
+                    System.out.println("\nThis flightId already exists. Please enter another flightId!");
                     System.out.println("Press Enter To Continue...");
                     input.nextLine();
                     continue addFlightMenuLoop;
@@ -235,6 +235,7 @@ public class AdminMenuMethods {
 
                 case "0":
                     return ;
+
                 default:
                     System.out.println("Please check your command!");
                     System.out.println("Press Enter To Continue...");
@@ -258,17 +259,17 @@ public class AdminMenuMethods {
             }
 
             else {
-                System.out.println("Please enter the ID of the flight that you want to remove : ");
+                System.out.println("Please enter the Id of the flight that you want to remove : ");
                 System.out.println("NOTE: If you want to return to the passengers menu, please type \"return\" and then press enter.");
                 System.out.print(">> ");
-                String flightID = input.nextLine();
-                if (Objects.equals(flightID, "return")) {
+                String flightId = input.nextLine();
+                if (Objects.equals(flightId, "return")) {
                     return ;
                 }
 
                 boolean flag = false;
                 for (int i = 0; i < flightsArrayList.size(); i++) {
-                    if (Objects.equals(flightID, flightsArrayList.get(i).getFlightId())) {
+                    if (Objects.equals(flightId, flightsArrayList.get(i).getFlightId())) {
                         flag = true;
                         flightsArrayList.remove(i);
                         break;
@@ -292,6 +293,7 @@ public class AdminMenuMethods {
     }
 
 
+// این متد برای نمایش جدول پروازها می باشد.
     public void flightSchedules (ArrayList<Flights> flightsArrayList) {
         System.out.print("\033[H\033[2J");
         System.out.flush();

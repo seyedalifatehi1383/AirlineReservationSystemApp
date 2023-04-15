@@ -240,15 +240,17 @@ public class Menus {
                     passengersMenuMethods.changePassword(passengersArrayList, index);
                     break;
                 case "2":
-
                     break;
                 case "3":
                     break;
                 case "4":
+                    passengersMenuMethods.ticketCancellation(passengersArrayList, index);
                     break;
                 case "5":
+                    passengersMenuMethods.bookedTickets(passengersArrayList, index);
                     break;
                 case "6":
+                    passengersMenuMethods.addCharge(passengersArrayList, index);
                     break;
                 default:
                     System.out.println("Please check your command!");
