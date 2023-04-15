@@ -1,5 +1,13 @@
 import java.util.ArrayList;
 
+/**
+ * Advanced Programming
+ * @Teacher Dr.Bostan
+ * @author Seyed Ali Fatehi
+ * @implNote Second Project (HW2)
+ * Airline Reservation System
+ */
+
 public class Main {
     public static void main(String[] args) {
         ArrayList<Flights> flightsArrayList = new ArrayList<>();
