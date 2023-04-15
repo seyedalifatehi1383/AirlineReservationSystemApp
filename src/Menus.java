@@ -108,7 +108,7 @@ public class Menus {
 
 //    این متد برای منوی ثبتنام در سیستم طراحی شده است و کاربر نمیتواند با نام کاربری مخصوص ادمین (Admin) و نام های کاربری قبلی در سایت ثبتنام نماید
     public void signUpMenu (ArrayList<Passengers> passengersArrayList) {
-        while (true) {
+        signUpMenuLoop: while (true) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
 
@@ -123,14 +123,12 @@ public class Menus {
                 return ;
             }
 
-            boolean flag = true;
             for (Passengers passengers : passengersArrayList) {
                 if (Objects.equals(username, passengers.getUsername())) {
                     System.out.println("\nThis username already exists. Please try another username.");
                     System.out.println("Press Enter To Continue...");
                     input.nextLine();
-                    flag = false;
-                    break;
+                    continue signUpMenuLoop;
                 }
             }
 
@@ -138,15 +136,18 @@ public class Menus {
                 System.out.println("\nYou are not allowed to use this username. Please try another username.");
                 System.out.println("Press Enter To Continue...");
                 input.nextLine();
-                flag = false;
-            }
-
-            if (!flag) {
                 continue;
             }
 
             System.out.print("\n    Please enter your password : ");
             String password = input.nextLine();
+            if (Objects.equals(username, "return")) {
+                System.out.println("\nYou are not allowed to use this password. Please try another password.");
+                System.out.println("Press Enter To Continue...");
+                input.nextLine();
+                continue;
+            }
+
             System.out.print("\n    Please confirm your password : ");
             String confirmPassword = input.nextLine();
             if (!Objects.equals(password, confirmPassword)) {
@@ -210,6 +211,51 @@ public class Menus {
     }
 
 
-//    این متد برای منوی مسافران می باشد.
+//    این متد برای "منوی اصلی" قسمت مسافران می باشد.
+    public void passengersMenu (ArrayList<Flights> flightsArrayList, ArrayList<Passengers> passengersArrayList, int index) {
+        PassengersMenuMethods passengersMenuMethods = new PassengersMenuMethods();
 
+        passengersMenuLoop: while (true) {
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+
+            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::");
+            System.out.println("               PASSENGERS MENU OPTIONS               ");
+            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::");
+            System.out.println(" ................................................... ");
+            System.out.println("    <1> Change password");
+            System.out.println("    <2> Search flight tickets");
+            System.out.println("    <3> Booking ticket");
+            System.out.println("    <4> Ticket cancellation");
+            System.out.println("    <5> Booked tickets");
+            System.out.println("    <6> Add charge");
+            System.out.println("    <0> Sign out");
+            System.out.print(  " >> "  );
+            String choose = input.nextLine();
+
+            switch (choose) {
+                case "0":
+                    return ;
+                case "1":
+                    passengersMenuMethods.changePassword(passengersArrayList, index);
+                    break;
+                case "2":
+
+                    break;
+                case "3":
+                    break;
+                case "4":
+                    break;
+                case "5":
+                    break;
+                case "6":
+                    break;
+                default:
+                    System.out.println("Please check your command!");
+                    System.out.println("Press Enter To Continue...");
+                    input.nextLine();
+                    break;
+            }
+        }
+    }
 }

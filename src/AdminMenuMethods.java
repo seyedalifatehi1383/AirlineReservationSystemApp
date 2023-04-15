@@ -276,7 +276,7 @@ public class AdminMenuMethods {
                 }
 
                 if (!flag) {
-                    System.out.println("There is no flightIds like this, please try another flightID!");
+                    System.out.println("There is no flightIds like this, please try another flightId!");
                     System.out.println("Press Enter To Continue...");
                     input.nextLine();
                     continue;
@@ -301,11 +301,11 @@ public class AdminMenuMethods {
         }
 
         else {
-            System.out.printf("|%-10s|%-13s|%-13s|%-13s|%-6s|%-13s|%-7s|", "FlightId", "Origin", "Destination", "Date", "Time", "Price", "Seats");
-            System.out.println("\n...................................................................................");
+            System.out.printf("|%-15s|%-13s|%-13s|%-13s|%-6s|%-13s|%-7s|", "FlightId", "Origin", "Destination", "Date", "Time", "Price", "Seats");
+            System.out.println("\n........................................................................................");
             for (Flights flights : flightsArrayList) {
-                System.out.printf(Locale.US, "|%-10s|%-13s|%-13s|%-13s|%-6s|%,-13d|%-7d|", flights.getFlightId(), flights.getOrigin(), flights.getDestination(), flights.getDate(), flights.getTime(), flights.getPrice(), flights.getSeats());
-                System.out.println("\n...................................................................................");
+                System.out.printf(Locale.US, "|%-15s|%-13s|%-13s|%-13s|%-6s|%,-13d|%-7d|", flights.getFlightId(), flights.getOrigin(), flights.getDestination(), flights.getDate(), flights.getTime(), flights.getPrice(), flights.getSeats());
+                System.out.println("\n........................................................................................");
             }
         }
 
