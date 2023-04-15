@@ -40,6 +40,7 @@ public class Menus {
         }
     }
 
+
 //    این متد برای منوی ورود به سیستم طراحی شده است
     public void signInMenu (ArrayList<Flights> flightsArrayList, ArrayList<Passengers> passengersArrayList) {
         Scanner input = new Scanner(System.in);
@@ -104,6 +105,7 @@ public class Menus {
         }
     }
 
+
 //    این متد برای منوی ثبتنام در سیستم طراحی شده است و کاربر نمیتواند با نام کاربری مخصوص ادمین (Admin) و نام های کاربری قبلی در سایت ثبتنام نماید
     public void signUpMenu (ArrayList<Passengers> passengersArrayList) {
         while (true) {
@@ -144,18 +146,17 @@ public class Menus {
             }
 
             System.out.print("\n    Please enter your password : ");
-            String password1 = input.nextLine();
+            String password = input.nextLine();
             System.out.print("\n    Please confirm your password : ");
-            String password2 = input.nextLine();
-            if (!Objects.equals(password2, password1)) {
+            String confirmPassword = input.nextLine();
+            if (!Objects.equals(password, confirmPassword)) {
                 System.out.println("\nYou didn't confirm your password. Please sign up again!");
                 System.out.println("Press Enter To Continue...");
                 input.nextLine();
                 continue;
             }
 
-            ArrayList<Tickets> tickets = new ArrayList<>();
-            Passengers passenger = new Passengers(username, password1, 0, tickets) ;
+            Passengers passenger = new Passengers(username, password, 0) ;
             passengersArrayList.add(passenger);
             System.out.println("\nSigning up Done!!!");
             System.out.println("Press Enter To Return...");
@@ -163,4 +164,7 @@ public class Menus {
             return ;
         }
     }
+
+// این متد برای "منوی اصلی" قسمت ادمین طراحی شده است.
+
 }
