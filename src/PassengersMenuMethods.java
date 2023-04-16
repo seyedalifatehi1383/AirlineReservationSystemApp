@@ -62,6 +62,82 @@ public class PassengersMenuMethods {
     }
 
 
+//    این متد برای رزرو کردن بلیت می باشد.
+    public void bookingTicket (ArrayList<Flights> flightsArrayList, ArrayList<Passengers> passengersArrayList, int passengerIndex) {
+        while (true) {
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+
+            if (flightsArrayList.isEmpty()) {
+                System.out.println("There is no flights for booking!");
+                System.out.println("Press Enter To Return...");
+                input.nextLine();
+                return ;
+            }
+
+            System.out.println("Please enter the fightId : ");
+            System.out.println("NOTE : If you want to return to the previous page, you can type \"return\" then press enter.");
+            System.out.print(  ">> "  );
+            String flightId = input.nextLine();
+
+            if (Objects.equals(flightId, "return")) {
+                return ;
+            }
+
+            boolean flag = false;
+            int flightIndex = 0;
+            for (int i = 0; i < flightsArrayList.size(); i++) {
+                if (Objects.equals(flightId, flightsArrayList.get(i).getFlightId())) {
+                    flag = true;
+                    flightIndex = i;
+                    break;
+                }
+            }
+
+            if (!flag) {
+                System.out.println("This flightId not exists. Please try another flightID.");
+                System.out.println("Press Enter To Continue...");
+                input.nextLine();
+                continue;
+            }
+
+            if (flightsArrayList.get(flightIndex).getSeats() == 0) {
+                System.out.println("There is no seats remained for this flight.");
+                System.out.println("Press Enter To Continue...");
+                input.nextLine();
+
+            } else if (passengersArrayList.get(passengerIndex).getCharge() < flightsArrayList.get(flightIndex).getPrice()) {
+                System.out.println("Your charge is not enough to book this ticket. Please charge your account then try again.");
+                System.out.println("Press Enter To Return...");
+                input.nextLine();
+                return ;
+            }
+
+            else {
+                String ticketId = "";
+                ticketId = ticketId.concat(passengersArrayList.get(passengerIndex).getUsername());
+                ticketId = ticketId.concat("@");
+                ticketId = ticketId.concat(flightsArrayList.get(flightIndex).getFlightId());
+                ticketId = ticketId.concat("@");
+                ticketId = ticketId.concat(String.valueOf(flightsArrayList.get(flightIndex).getSeats()));
+
+                int countSeats = flightsArrayList.get(flightIndex).getSeats();
+                countSeats--;
+                long countCharge = passengersArrayList.get(passengerIndex).getCharge();
+                countCharge -= flightsArrayList.get(flightIndex).getPrice();
+                passengersArrayList.get(passengerIndex).setCharge(countCharge);
+                flightsArrayList.get(flightIndex).setSeats(countSeats);
+
+                System.out.println("Ticket booked.");
+                System.out.println("Your ticketId is : " + ticketId);
+                System.out.println("Press Enter To Return...");
+                input.nextLine();
+                return ;
+            }
+        }
+    }
+
+
 //    این متد برای نمایش بلیت های رزرو شده می باشد.
     public void bookedTickets (ArrayList<Passengers> passengersArrayList, int index) {
         System.out.print("\033[H\033[2J");
@@ -75,7 +151,7 @@ public class PassengersMenuMethods {
             System.out.printf("|%-20s|%-15s|%-13s|%-13s|%-12s|%-5s|", "TicketId", "FlightId", "Origin", "Destination", "Date", "Time");
             System.out.println("\n.........................................................................................................................................");
             for (int i = 0; i < passengersArrayList.get(index).getTickets().size(); i++) {
-                System.out.printf(Locale.US, "|%-20d|%-15s|%-13s|%-13s|%-12s|%-5s|", passengersArrayList.get(index).getTickets().get(i).getTicketId(), passengersArrayList.get(index).getTickets().get(i).getFlightInfo().getFlightId(), passengersArrayList.get(index).getTickets().get(i).getFlightInfo().getOrigin(), passengersArrayList.get(index).getTickets().get(i).getFlightInfo().getDestination(), passengersArrayList.get(index).getTickets().get(i).getFlightInfo().getDate(), passengersArrayList.get(index).getTickets().get(i).getFlightInfo().getTime());
+                System.out.printf(Locale.US, "|%-20s|%-15s|%-13s|%-13s|%-12s|%-5s|", passengersArrayList.get(index).getTickets().get(i).getTicketId(), passengersArrayList.get(index).getTickets().get(i).getFlightInfo().getFlightId(), passengersArrayList.get(index).getTickets().get(i).getFlightInfo().getOrigin(), passengersArrayList.get(index).getTickets().get(i).getFlightInfo().getDestination(), passengersArrayList.get(index).getTickets().get(i).getFlightInfo().getDate(), passengersArrayList.get(index).getTickets().get(i).getFlightInfo().getTime());
                 System.out.println("\n.........................................................................................................................................");
             }
         }
@@ -149,11 +225,13 @@ public class PassengersMenuMethods {
             }
 
             for (int i = 0; i < passengersArrayList.get(index).getTickets().size(); i++) {
-                if (Integer.parseInt(ticketId) == passengersArrayList.get(index).getTickets().get(i).getTicketId()) {
+                if (ticketId.equals(passengersArrayList.get(index).getTickets().get(i).getTicketId())) {
+
                     passengersArrayList.get(index).getTickets().remove(i);
                     long passengerCharge = passengersArrayList.get(index).getCharge();
                     passengerCharge += passengersArrayList.get(index).getTickets().get(i).getFlightInfo().getPrice();
                     passengersArrayList.get(index).setCharge(passengerCharge);
+
                     System.out.println("Ticket canceled!");
                     System.out.println("Press Enter To Return...");
                     input.nextLine();

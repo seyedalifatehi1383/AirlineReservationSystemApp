@@ -1,14 +1,14 @@
 // این کلاس برای مدیریت بلیت های رزرو شده مسافران طراحی شده است
 public class Tickets {
-    private int ticketId;
+    private String ticketId;
     private Flights flightInfo;
 
-    public int getTicketId() {
+    public String getTicketId() {
         return ticketId;
     }
 
-    public void setTicketId(int ticketID) {
-        this.ticketId = ticketID;
+    public void setTicketId(String ticketId) {
+        this.ticketId = ticketId;
     }
 
     public Flights getFlightInfo() {
@@ -19,8 +19,8 @@ public class Tickets {
         this.flightInfo = flightInfo;
     }
 
-    public Tickets(int ticketID, Flights flightInfo) {
-        this.ticketId = ticketID;
+    public Tickets(String ticketId, Flights flightInfo) {
+        this.ticketId = ticketId;
         this.flightInfo = flightInfo;
     }
 }

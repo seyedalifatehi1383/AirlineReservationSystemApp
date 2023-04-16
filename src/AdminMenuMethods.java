@@ -95,7 +95,7 @@ public class AdminMenuMethods {
 //    ولی چون مدیریت قسمت بروزرسانی اطلاعات پرواز در این متد صورت می گیرد و متد پایینی هم زیرمجموعه این متد هست،
 //    من این متد را متد اصلی برای قسمت بروزرسانی اطلاعات پرواز در نظر گرفتم.
     public void updateFlights (ArrayList<Flights> flightsArrayList) {
-        updateFlightsLoop: while (true) {
+        while (true) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
 

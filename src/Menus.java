@@ -215,7 +215,7 @@ public class Menus {
     public void passengersMenu (ArrayList<Flights> flightsArrayList, ArrayList<Passengers> passengersArrayList, int index) {
         PassengersMenuMethods passengersMenuMethods = new PassengersMenuMethods();
 
-        passengersMenuLoop: while (true) {
+        while (true) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
 
@@ -240,8 +240,10 @@ public class Menus {
                     passengersMenuMethods.changePassword(passengersArrayList, index);
                     break;
                 case "2":
+                    passengersMenuMethods.searchFlightTickets();
                     break;
                 case "3":
+                    passengersMenuMethods.bookingTicket(flightsArrayList, passengersArrayList, index);
                     break;
                 case "4":
                     passengersMenuMethods.ticketCancellation(passengersArrayList, index);
