@@ -50,10 +50,10 @@ public class Menus {
             System.out.print("\033[H\033[2J");
             System.out.flush();
 
-            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-            System.out.println("...............................................SIGN IN MENU..............................................");
-            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-            System.out.println(" NOTE : IF YOU WANT TO RETURN TO THE MAIN MENU, PLEASE TYPE \"return\" AS A USERNAME AND THEN PRESS ENTER.\n");
+            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+            System.out.println(".......................................................SIGN IN MENU......................................................");
+            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+            System.out.println(" NOTE : IF YOU WANT TO RETURN TO THE MAIN MENU, PLEASE TYPE \"return\" AS THE USERNAME OR THE PASSWORD AND THEN PRESS ENTER.\n");
             System.out.print(  "    Please enter your username : ");
             String username = input.nextLine();
             if (Objects.equals(username, "return")) {
@@ -78,6 +78,10 @@ public class Menus {
 
             System.out.print("\n    Please enter your password : ");
             String password = input.nextLine();
+
+            if (Objects.equals(password, "return")) {
+                return ;
+            }
 
             if (Objects.equals(username, "Admin") && Objects.equals(password, "Admin")) {
                 adminMenu(flightsArrayList);
@@ -112,10 +116,10 @@ public class Menus {
             System.out.print("\033[H\033[2J");
             System.out.flush();
 
-            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-            System.out.println("................................................SIGN UP MENU...............................................");
-            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-            System.out.println("  NOTE : IF YOU WANT TO RETURN TO THE MAIN MENU, PLEASE TYPE \"return\" AS A USERNAME AND THEN PRESS ENTER.\n");
+            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+            System.out.println(".......................................................SIGN UP MENU......................................................");
+            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+            System.out.println(" NOTE : IF YOU WANT TO RETURN TO THE MAIN MENU, PLEASE TYPE \"return\" AS THE USERNAME OR THE PASSWORD AND THEN PRESS ENTER.\n");
             System.out.print(  "    Please enter your username : ");
             String username = input.nextLine();
 
@@ -141,11 +145,8 @@ public class Menus {
 
             System.out.print("\n    Please enter your password : ");
             String password = input.nextLine();
-            if (Objects.equals(username, "return")) {
-                System.out.println("\nYou are not allowed to use this password. Please try another password.");
-                System.out.println("Press Enter To Continue...");
-                input.nextLine();
-                continue;
+            if (Objects.equals(password, "return")) {
+                return ;
             }
 
             System.out.print("\n    Please confirm your password : ");
@@ -166,11 +167,12 @@ public class Menus {
         }
     }
 
+
 // این متد برای "منوی اصلی" قسمت ادمین طراحی شده است.
     public void adminMenu (ArrayList<Flights> flightsArrayList) {
         AdminMenuMethods adminMenuMethods = new AdminMenuMethods();
 
-        adminMenuLoop: while (true) {
+        while (true) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
 
@@ -240,7 +242,7 @@ public class Menus {
                     passengersMenuMethods.changePassword(passengersArrayList, index);
                     break;
                 case "2":
-                    passengersMenuMethods.searchFlightTickets();
+                    passengersMenuMethods.searchFlightTickets(flightsArrayList);
                     break;
                 case "3":
                     passengersMenuMethods.bookingTicket(flightsArrayList, passengersArrayList, index);

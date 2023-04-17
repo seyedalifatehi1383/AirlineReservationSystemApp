@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 // این کلاس برای متد های منوی ادمین طراحی شده است
 public class AdminMenuMethods {
+    CheckingEnteredData checkingEnteredData = new CheckingEnteredData();
     IsEqualNotCaseSensitiveMethod isEqualNotCaseSensitiveMethod = new IsEqualNotCaseSensitiveMethod();
     Scanner input = new Scanner(System.in);
 
@@ -47,38 +48,22 @@ public class AdminMenuMethods {
 
             System.out.print("Please enter the price : ");
             String price = input.nextLine();
-            if (Objects.equals(price, "")) {
-                System.out.println("\nYour entered count of seats is wrong! Please add flight again!");
+
+            if (!checkingEnteredData.isEnteredNumberRight(price)) {
+                System.out.println("\nYour entered price is wrong! Please add flight again!");
                 System.out.println("Press Enter To Continue...");
                 input.nextLine();
                 continue;
-            }
-            char[] priceCharArray = price.toCharArray();
-            for (int i = 0; i < price.length(); i++) {
-                if (!(priceCharArray[i] >= '0' && priceCharArray[i] <= '9')) {
-                    System.out.println("\nYour entered charge is wrong! Please add flight again!");
-                    System.out.println("Press Enter To Continue...");
-                    input.nextLine();
-                    continue addFlightMenuLoop;
-                }
             }
 
             System.out.print("Please enter the count of the seats : ");
             String seats = input.nextLine();
-            if (Objects.equals(seats, "")) {
+
+            if (!checkingEnteredData.isEnteredNumberRight(seats)) {
                 System.out.println("\nYour entered count of seats is wrong! Please add flight again!");
                 System.out.println("Press Enter To Continue...");
                 input.nextLine();
                 continue;
-            }
-            char[] seatsCharArray = seats.toCharArray();
-            for (int i = 0; i < seats.length(); i++) {
-                if (!(seatsCharArray[i] >= '0' && seatsCharArray[i] <= '9')) {
-                    System.out.println("\nYour entered count of seats is wrong! Please add flight again!");
-                    System.out.println("Press Enter To Continue...");
-                    input.nextLine();
-                    continue addFlightMenuLoop;
-                }
             }
 
             Flights flight = new Flights(Integer.parseInt(seats), destination, date, origin, flightId, time, Integer.parseInt(price));
@@ -165,7 +150,7 @@ public class AdminMenuMethods {
                     System.out.print("\033[H\033[2J");
                     System.out.flush();
 
-                    System.out.print("Please enter the new flightID : ");
+                    System.out.print("Please enter the new flightId : ");
                     String newFlightID = input.nextLine();
                     flightsArrayList.get(index).setFlightId(newFlightID);
                     System.out.println("FlightID changed!");
@@ -215,6 +200,14 @@ public class AdminMenuMethods {
 
                     System.out.print("Please enter the new price : ");
                     String newPrice = input.nextLine();
+
+                    if (checkingEnteredData.isEnteredNumberRight(newPrice)) {
+                        System.out.println("The entered new price is not right. Please try again!");
+                        System.out.println("Press Enter To Continue...");
+                        input.nextLine();
+                        continue;
+                    }
+
                     flightsArrayList.get(index).setPrice(Integer.parseInt(newPrice));
                     System.out.println("Price changed!");
                     System.out.println("Press Enter To Return...");
@@ -227,6 +220,14 @@ public class AdminMenuMethods {
 
                     System.out.print("Please enter the new count of seats : ");
                     String newSeats = input.nextLine();
+
+                    if (checkingEnteredData.isEnteredNumberRight(newSeats)) {
+                        System.out.println("The entered new count of seats is not right. Please try again!");
+                        System.out.println("Press Enter To Continue...");
+                        input.nextLine();
+                        continue;
+                    }
+
                     flightsArrayList.get(index).setSeats(Integer.parseInt(newSeats));
                     System.out.println("Seats changed!");
                     System.out.println("Press Enter To Return...");
@@ -303,10 +304,10 @@ public class AdminMenuMethods {
         }
 
         else {
-            System.out.printf("|%-15s|%-13s|%-13s|%-13s|%-6s|%-13s|%-7s|", "FlightId", "Origin", "Destination", "Date", "Time", "Price", "Seats");
+            System.out.printf("|%-20s|%-13s|%-13s|%-13s|%-6s|%-13s|%-7s|", "FlightId", "Origin", "Destination", "Date", "Time", "Price", "Seats");
             System.out.println("\n........................................................................................");
             for (Flights flights : flightsArrayList) {
-                System.out.printf(Locale.US, "|%-15s|%-13s|%-13s|%-13s|%-6s|%,-13d|%-7d|", flights.getFlightId(), flights.getOrigin(), flights.getDestination(), flights.getDate(), flights.getTime(), flights.getPrice(), flights.getSeats());
+                System.out.printf(Locale.US, "|%-20s|%-13s|%-13s|%-13s|%-6s|%,-13d|%-7d|", flights.getFlightId(), flights.getOrigin(), flights.getDestination(), flights.getDate(), flights.getTime(), flights.getPrice(), flights.getSeats());
                 System.out.println("\n........................................................................................");
             }
         }
