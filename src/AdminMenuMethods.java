@@ -18,8 +18,15 @@ public class AdminMenuMethods {
             System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
             System.out.println("                          Add Flights                         ");
             System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n");
-            System.out.print("Please enter the flightId : ");
+            System.out.println("Please enter the flightId : ");
+            System.out.println("NOTE: If you want to return to the previous menu, you can type \"return\" as the flightId and then press enter.");
+            System.out.print(">> ");
             String flightId = input.nextLine();
+
+            if (Objects.equals(flightId, "return")) {
+                return ;
+            }
+
             for (Flights flights : flightsArrayList) {
                 if (Objects.equals(flightId, flights.getFlightId())) {
                     System.out.println("\nThis flightId already exists. Please enter another flightId!");
@@ -29,9 +36,12 @@ public class AdminMenuMethods {
                 }
             }
 
-            System.out.print("Please enter the origin : ");
+            System.out.println("Please enter the origin : ");
+            System.out.print(">> ");
             String origin = input.nextLine();
-            System.out.print("Please enter the destination : ");
+            System.out.println("Please enter the destination : ");
+            System.out.println("NOTE: Origin and destination cannot be equals.");
+            System.out.print(">> ");
             String destination = input.nextLine();
             if (isEqualNotCaseSensitiveMethod.isEqualNotCaseSensitive(origin, destination)) {
                 System.out.println("The origin and the destination are same. Please add flight again!");
@@ -40,7 +50,9 @@ public class AdminMenuMethods {
                 continue;
             }
 
-            System.out.print("Please enter the date : ");
+            System.out.println("Please enter the date : ");
+            System.out.println("NOTE: The entered date should be like the example : 0000-00-00 or 0000/00/00");
+            System.out.print(">> ");
             String date = input.nextLine();
 
             if (!checkingEnteredData.isEnteredDateRight(date)) {
@@ -51,6 +63,8 @@ public class AdminMenuMethods {
             }
 
             System.out.print("Please enter the time : ");
+            System.out.println("NOTE: The entered time should be like the example : 22:22");
+            System.out.print(">> ");
             String time = input.nextLine();
 
             if (!checkingEnteredData.isEnteredTimeRight(time)) {
@@ -60,7 +74,8 @@ public class AdminMenuMethods {
                 continue;
             }
 
-            System.out.print("Please enter the price : ");
+            System.out.println("Please enter the price : ");
+            System.out.print(">> ");
             String price = input.nextLine();
 
             if (!checkingEnteredData.isEnteredNumberRight(price)) {
@@ -70,7 +85,8 @@ public class AdminMenuMethods {
                 continue;
             }
 
-            System.out.print("Please enter the count of the seats : ");
+            System.out.println("Please enter the count of the seats : ");
+            System.out.print(">> ");
             String seats = input.nextLine();
 
             if (!checkingEnteredData.isEnteredNumberRight(seats)) {
@@ -142,6 +158,8 @@ public class AdminMenuMethods {
 
 //    این متد برای منوی انتخاب و تغییر اطلاعات پرواز است.
     public void updateFlightsChangeOptionsMenu (ArrayList<Flights> flightsArrayList, int index) {
+        UpdateFlightsChangeOptionsMenuMethods updateFlightsChangeOptionsMenuMethods = new UpdateFlightsChangeOptionsMenuMethods();
+
         while (true) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
@@ -150,137 +168,45 @@ public class AdminMenuMethods {
             System.out.println("                        Update Flights                        ");
             System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n");
             System.out.println("Please choose that which of the following chooses you want to update :\n");
-            System.out.println("    1- FlightId");
-            System.out.println("    2- Origin");
-            System.out.println("    3- Destination");
-            System.out.println("    4- Date");
-            System.out.println("    5- Price");
-            System.out.println("    6- Seats");
-            System.out.println("    7- Time");
-            System.out.println("    0- Return");
+            System.out.println("    <1> FlightId");
+            System.out.println("    <2> Origin");
+            System.out.println("    <3> Destination");
+            System.out.println("    <4> Date");
+            System.out.println("    <5> Time");
+            System.out.println("    <6> Price");
+            System.out.println("    <7> Seats");
+            System.out.println("    <0> Return");
             System.out.print("\n>> ");
             String select = input.nextLine();
 
             switch (select) {
                 case "1":
-                    System.out.print("\033[H\033[2J");
-                    System.out.flush();
-
-                    System.out.print("Please enter the new flightId : ");
-                    String newFlightId = input.nextLine();
-                    flightsArrayList.get(index).setFlightId(newFlightId);
-                    System.out.println("FlightId changed!");
-                    System.out.println("Press Enter To Return...");
-                    input.nextLine();
-                    return ;
+                    updateFlightsChangeOptionsMenuMethods.updateFlightId(flightsArrayList, index);
+                    break;
 
                 case "2":
-                    System.out.print("\033[H\033[2J");
-                    System.out.flush();
-
-                    System.out.print("Please enter the new origin : ");
-                    String newOrigin = input.nextLine();
-                    flightsArrayList.get(index).setOrigin(newOrigin);
-                    System.out.println("Origin changed!");
-                    System.out.println("Press Enter To Return...");
-                    input.nextLine();
-                    return ;
+                    updateFlightsChangeOptionsMenuMethods.updateOrigin(flightsArrayList, index);
+                    break;
 
                 case "3":
-                    System.out.print("\033[H\033[2J");
-                    System.out.flush();
-
-                    System.out.print("Please enter the new destination : ");
-                    String newDestination = input.nextLine();
-                    flightsArrayList.get(index).setDestination(newDestination);
-                    System.out.println("Destination changed!");
-                    System.out.println("Press Enter To Return...");
-                    input.nextLine();
-                    return ;
+                    updateFlightsChangeOptionsMenuMethods.updateDestination(flightsArrayList, index);
+                    break;
 
                 case "4":
-                    System.out.print("\033[H\033[2J");
-                    System.out.flush();
-
-                    System.out.println("Please enter the new date : ");
-                    System.out.println("NOTE: The entered date should be like the example : 1111-11-11 or 1111/11/11.");
-                    System.out.print(">> ");
-                    String newDate = input.nextLine();
-
-                    if (!checkingEnteredData.isEnteredDateRight(newDate)) {
-                        System.out.println("The entered new date is wrong. Please try again!");
-                        System.out.println("Press Enter To Continue...");
-                        input.nextLine();
-                        continue;
-                    }
-
-                    flightsArrayList.get(index).setDate(newDate);
-                    System.out.println("Date changed!");
-                    System.out.println("Press Enter To Return...");
-                    input.nextLine();
-                    return ;
+                    updateFlightsChangeOptionsMenuMethods.updateDate(flightsArrayList, index);
+                    break;
 
                 case "5":
-                    System.out.print("\033[H\033[2J");
-                    System.out.flush();
-
-                    System.out.print("Please enter the new price : ");
-                    String newPrice = input.nextLine();
-
-                    if (checkingEnteredData.isEnteredNumberRight(newPrice)) {
-                        System.out.println("The entered new price is not right. Please try again!");
-                        System.out.println("Press Enter To Continue...");
-                        input.nextLine();
-                        continue;
-                    }
-
-                    flightsArrayList.get(index).setPrice(Integer.parseInt(newPrice));
-                    System.out.println("Price changed!");
-                    System.out.println("Press Enter To Return...");
-                    input.nextLine();
-                    return ;
+                    updateFlightsChangeOptionsMenuMethods.updateTIme(flightsArrayList, index);
+                    break;
 
                 case "6":
-                    System.out.print("\033[H\033[2J");
-                    System.out.flush();
-
-                    System.out.print("Please enter the new count of seats : ");
-                    String newSeats = input.nextLine();
-
-                    if (checkingEnteredData.isEnteredNumberRight(newSeats)) {
-                        System.out.println("The entered new count of seats is not right. Please try again!");
-                        System.out.println("Press Enter To Continue...");
-                        input.nextLine();
-                        continue;
-                    }
-
-                    flightsArrayList.get(index).setSeats(Integer.parseInt(newSeats));
-                    System.out.println("Seats changed!");
-                    System.out.println("Press Enter To Return...");
-                    input.nextLine();
-                    return ;
+                    updateFlightsChangeOptionsMenuMethods.updatePrice(flightsArrayList, index);
+                    break;
 
                 case "7":
-                    System.out.print("\033[H\033[2J");
-                    System.out.flush();
-
-                    System.out.println("Please enter the new time : ");
-                    System.out.println("NOTE: The entered time should be like the example : 12:12.");
-                    System.out.print(">> ");
-                    String newTime = input.nextLine();
-
-                    if (!checkingEnteredData.isEnteredTimeRight(newTime)) {
-                        System.out.println("The entered new time is wrong. Please try again!");
-                        System.out.println("Press Enter To Continue...");
-                        input.nextLine();
-                        continue;
-                    }
-
-                    flightsArrayList.get(index).setTime(newTime);
-                    System.out.println("Time changed!");
-                    System.out.println("Press Enter To Return...");
-                    input.nextLine();
-                    return ;
+                    updateFlightsChangeOptionsMenuMethods.updateSeats(flightsArrayList, index);
+                    break;
 
                 case "0":
                     return ;
