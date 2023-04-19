@@ -217,6 +217,11 @@ public class Menus {
     public void passengersMenu (ArrayList<Flights> flightsArrayList, ArrayList<Passengers> passengersArrayList, int index) {
         PassengersMenuMethods passengersMenuMethods = new PassengersMenuMethods();
 
+        ArrayList<Tickets> ticketsArrayList = new ArrayList<>();
+        if (passengersArrayList.get(index).getTickets() != null) {
+            ticketsArrayList = passengersArrayList.get(index).getTickets();
+        }
+
         while (true) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
@@ -236,31 +241,22 @@ public class Menus {
             String choose = input.nextLine();
 
             switch (choose) {
-                case "0":
-                    return ;
-                case "1":
-                    passengersMenuMethods.changePassword(passengersArrayList, index);
-                    break;
-                case "2":
-                    passengersMenuMethods.searchFlightTickets(flightsArrayList);
-                    break;
-                case "3":
-                    passengersMenuMethods.bookingTicket(flightsArrayList, passengersArrayList, index);
-                    break;
-                case "4":
-                    passengersMenuMethods.ticketCancellation(passengersArrayList, index);
-                    break;
-                case "5":
-                    passengersMenuMethods.bookedTickets(passengersArrayList, index);
-                    break;
-                case "6":
-                    passengersMenuMethods.addCharge(passengersArrayList, index);
-                    break;
-                default:
+                case "0" -> {
+                    passengersArrayList.get(index).setTickets(ticketsArrayList);
+                    return;
+                }
+                case "1" -> passengersMenuMethods.changePassword(passengersArrayList, index);
+                case "2" -> passengersMenuMethods.searchFlightTickets(flightsArrayList);
+                case "3" ->
+                        passengersMenuMethods.bookingTicket(flightsArrayList, passengersArrayList, ticketsArrayList, index);
+                case "4" -> passengersMenuMethods.ticketCancellation(passengersArrayList, ticketsArrayList, index);
+                case "5" -> passengersMenuMethods.bookedTickets(ticketsArrayList);
+                case "6" -> passengersMenuMethods.addCharge(passengersArrayList, index);
+                default -> {
                     System.out.println("Please check your command!");
                     System.out.println("Press Enter To Continue...");
                     input.nextLine();
-                    break;
+                }
             }
         }
     }

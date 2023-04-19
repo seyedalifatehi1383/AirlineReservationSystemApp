@@ -195,10 +195,10 @@ public class PassengersMenuMethods {
 
             else {
                 System.out.println("The info(s) of the flight(s) you are looking for is(are) :");
-                System.out.printf("|%-15s|%-13s|%-13s|%-12s|%-5s|%-13s|%-7s|", "FlightId", "Origin", "Destination", "Date", "Time", "Price", "Seats");
+                System.out.printf("|%-15s|%-13s|%-13s|%-12s|%-8s|%-13s|%-7s|", "FlightId", "Origin", "Destination", "Date", "Time", "Price", "Seats");
                 System.out.println("\n..........................................................................................................................");
                 for (Flights flights : foundFlightsArrayList) {
-                    System.out.printf(Locale.US, "|%-15s|%-13s|%-13s|%-12s|%-5s|%-13d|%-7d|", flights.getFlightId(), flights.getOrigin(), flights.getDestination(), flights.getDate(), flights.getTime(), flights.getPrice(), flights.getSeats());
+                    System.out.printf(Locale.US, "|%-15s|%-13s|%-13s|%-12s|%-8s|%-13d|%-7d|", flights.getFlightId(), flights.getOrigin(), flights.getDestination(), flights.getDate(), flights.getTime(), flights.getPrice(), flights.getSeats());
                     System.out.println("\n..........................................................................................................................");
                 }
             }
@@ -210,13 +210,7 @@ public class PassengersMenuMethods {
 
 
 //    این متد برای رزرو کردن بلیت می باشد.
-    public void bookingTicket (ArrayList<Flights> flightsArrayList, ArrayList<Passengers> passengersArrayList, int passengerIndex) {
-        ArrayList<Tickets> ticketsArrayList = new ArrayList<>();
-
-        if (passengersArrayList.get(passengerIndex).getTickets() != null) {
-            ticketsArrayList = passengersArrayList.get(passengerIndex).getTickets();
-        }
-
+    public void bookingTicket (ArrayList<Flights> flightsArrayList, ArrayList<Passengers> passengersArrayList, ArrayList<Tickets> ticketsArrayList, int passengerIndex) {
         while (true) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
@@ -271,7 +265,7 @@ public class PassengersMenuMethods {
             }
 
             else {
-//                اینجا من اومدم تیکت ایدی رو ایمجورس اسختم که اول یوزرنیم کاربر بعد ایدی پرواز و بعد تعداد صندلی های باقی مونده قبل اینکه کاربر بلیت رزرو کنه و هرکدوم با @ از هم جدا شدن (مثال : username@flightId@434)
+//                اینجا من اومدم تیکت ایدی رو ایمجورس اسختم که اول یوزرنیم کاربر بعد ایدی پرواز و بعد تعداد صندلی های باقی مونده قبل اینکه کاربر بلیت رزرو کنه و هرکدوم با @ از هم جدا شدن مثال : username@flightId@434)
                 String ticketId = "";
                 ticketId = ticketId.concat(passengersArrayList.get(passengerIndex).getUsername());
                 ticketId = ticketId.concat("@");
@@ -289,7 +283,6 @@ public class PassengersMenuMethods {
 
                 Tickets ticket = new Tickets(ticketId, flightsArrayList.get(flightIndex));
                 ticketsArrayList.add(ticket);
-                passengersArrayList.get(passengerIndex).setTickets(ticketsArrayList);
 
                 System.out.println("Ticket booked.");
                 System.out.println("Your ticketId is : " + ticketId);
@@ -302,25 +295,19 @@ public class PassengersMenuMethods {
 
 
 //    این متد برای نمایش بلیت های رزرو شده می باشد.
-    public void bookedTickets (ArrayList<Passengers> passengersArrayList, int index) {
-        ArrayList<Tickets> ticketsArrayList = new ArrayList<>();
-
-        if (passengersArrayList.get(index).getTickets() != null) {
-            ticketsArrayList = passengersArrayList.get(index).getTickets();
-        }
-
+    public void bookedTickets (ArrayList<Tickets> ticketsArrayList) {
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
-        if (passengersArrayList.get(index).getTickets().isEmpty()) {
+        if (ticketsArrayList.isEmpty()) {
             System.out.println("There is nothing to see!");
         }
 
         else {
             System.out.printf("|%-25s|%-15s|%-13s|%-13s|%-12s|%-8s|%-15s|", "TicketId", "FlightId", "Origin", "Destination", "Date", "Time", "Amount Paid");
             System.out.println("\n.......................................................................................................................");
-            for (int i = 0; i < passengersArrayList.get(index).getTickets().size(); i++) {
-                System.out.printf(Locale.US, "|%-25s|%-15s|%-13s|%-13s|%-12s|%-8s|%-,15d|", ticketsArrayList.get(i).getTicketId(), ticketsArrayList.get(i).getFlightInfo().getFlightId(), ticketsArrayList.get(i).getFlightInfo().getOrigin(), ticketsArrayList.get(i).getFlightInfo().getDestination(), ticketsArrayList.get(i).getFlightInfo().getDate(), ticketsArrayList.get(i).getFlightInfo().getTime(), ticketsArrayList.get(i).getFlightInfo().getPrice());
+            for (Tickets tickets : ticketsArrayList) {
+                System.out.printf(Locale.US, "|%-25s|%-15s|%-13s|%-13s|%-12s|%-8s|%-,15d|", tickets.getTicketId(), tickets.getFlightInfo().getFlightId(), tickets.getFlightInfo().getOrigin(), tickets.getFlightInfo().getDestination(), tickets.getFlightInfo().getDate(), tickets.getFlightInfo().getTime(), tickets.getFlightInfo().getPrice());
                 System.out.println("\n.......................................................................................................................");
             }
         }
@@ -368,8 +355,8 @@ public class PassengersMenuMethods {
 
 
 //   این متد برای کنسل کردن بلیت مورد استفاده قرار می گیرد.
-    public void ticketCancellation (ArrayList<Passengers> passengersArrayList, int index) {
-        ticketCancellationLoop: while (true) {
+    public void ticketCancellation (ArrayList<Passengers> passengersArrayList, ArrayList<Tickets> ticketsArrayList, int index) {
+        while (true) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
 
@@ -385,23 +372,17 @@ public class PassengersMenuMethods {
                 return ;
             }
 
-            char[] ticketIDCharArray = ticketId.toCharArray();
-            for (char c : ticketIDCharArray) {
-                if (!(c >= '0' && c <= '9')) {
-                    System.out.println("The entered ticketId is not valid! Please try again.");
-                    System.out.println("Press Enter To Continue...");
-                    input.nextLine();
-                    continue ticketCancellationLoop;
-                }
-            }
-
-            for (int i = 0; i < passengersArrayList.get(index).getTickets().size(); i++) {
-                if (ticketId.equals(passengersArrayList.get(index).getTickets().get(i).getTicketId())) {
-
-                    passengersArrayList.get(index).getTickets().remove(i);
+            for (int i = 0; i < ticketsArrayList.size(); i++) {
+                if (ticketId.equals(ticketsArrayList.get(i).getTicketId())) {
                     long passengerCharge = passengersArrayList.get(index).getCharge();
-                    passengerCharge += passengersArrayList.get(index).getTickets().get(i).getFlightInfo().getPrice();
+                    passengerCharge += ticketsArrayList.get(i).getFlightInfo().getPrice();
                     passengersArrayList.get(index).setCharge(passengerCharge);
+
+                    int countSeats = ticketsArrayList.get(i).getFlightInfo().getSeats();
+                    countSeats++;
+                    ticketsArrayList.get(i).getFlightInfo().setSeats(countSeats);
+
+                    ticketsArrayList.remove(i);
 
                     System.out.println("Ticket canceled!");
                     System.out.println("Press Enter To Return...");
