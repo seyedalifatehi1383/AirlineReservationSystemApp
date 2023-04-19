@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * Advanced Programming
  * @Teacher Dr.Bostan
  * @author Seyed Ali Fatehi
- * @deprecated Second Project (HW2) :
+ * Second Project (HW2) :
  * Airline Reservation System
  */
 

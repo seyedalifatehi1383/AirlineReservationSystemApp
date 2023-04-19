@@ -43,8 +43,22 @@ public class AdminMenuMethods {
             System.out.print("Please enter the date : ");
             String date = input.nextLine();
 
+            if (!checkingEnteredData.isEnteredDateRight(date)) {
+                System.out.println("\nYour entered date is wrong! Please add flight again!");
+                System.out.println("Press Enter To Continue...");
+                input.nextLine();
+                continue;
+            }
+
             System.out.print("Please enter the time : ");
             String time = input.nextLine();
+
+            if (!checkingEnteredData.isEnteredTimeRight(time)) {
+                System.out.println("\nYour entered time is wrong! Please add flight again!");
+                System.out.println("Press Enter To Continue...");
+                input.nextLine();
+                continue;
+            }
 
             System.out.print("Please enter the price : ");
             String price = input.nextLine();
@@ -90,6 +104,7 @@ public class AdminMenuMethods {
             if (flightsArrayList.isEmpty()) {
                 System.out.println("There is no added flights!");
                 System.out.println("Press Enter To Return...");
+                input.nextLine();
                 return ;
             }
 
@@ -139,21 +154,22 @@ public class AdminMenuMethods {
             System.out.println("    2- Origin");
             System.out.println("    3- Destination");
             System.out.println("    4- Date");
-            System.out.println("    5- Time");
-            System.out.println("    6- Price");
+            System.out.println("    5- Price");
             System.out.println("    6- Seats");
+            System.out.println("    7- Time");
             System.out.println("    0- Return");
             System.out.print("\n>> ");
             String select = input.nextLine();
+
             switch (select) {
                 case "1":
                     System.out.print("\033[H\033[2J");
                     System.out.flush();
 
                     System.out.print("Please enter the new flightId : ");
-                    String newFlightID = input.nextLine();
-                    flightsArrayList.get(index).setFlightId(newFlightID);
-                    System.out.println("FlightID changed!");
+                    String newFlightId = input.nextLine();
+                    flightsArrayList.get(index).setFlightId(newFlightId);
+                    System.out.println("FlightId changed!");
                     System.out.println("Press Enter To Return...");
                     input.nextLine();
                     return ;
@@ -186,8 +202,18 @@ public class AdminMenuMethods {
                     System.out.print("\033[H\033[2J");
                     System.out.flush();
 
-                    System.out.print("Please enter the new date : ");
+                    System.out.println("Please enter the new date : ");
+                    System.out.println("NOTE: The entered date should be like the example : 1111-11-11 or 1111/11/11.");
+                    System.out.print(">> ");
                     String newDate = input.nextLine();
+
+                    if (!checkingEnteredData.isEnteredDateRight(newDate)) {
+                        System.out.println("The entered new date is wrong. Please try again!");
+                        System.out.println("Press Enter To Continue...");
+                        input.nextLine();
+                        continue;
+                    }
+
                     flightsArrayList.get(index).setDate(newDate);
                     System.out.println("Date changed!");
                     System.out.println("Press Enter To Return...");
@@ -234,6 +260,28 @@ public class AdminMenuMethods {
                     input.nextLine();
                     return ;
 
+                case "7":
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
+
+                    System.out.println("Please enter the new time : ");
+                    System.out.println("NOTE: The entered time should be like the example : 12:12.");
+                    System.out.print(">> ");
+                    String newTime = input.nextLine();
+
+                    if (!checkingEnteredData.isEnteredTimeRight(newTime)) {
+                        System.out.println("The entered new time is wrong. Please try again!");
+                        System.out.println("Press Enter To Continue...");
+                        input.nextLine();
+                        continue;
+                    }
+
+                    flightsArrayList.get(index).setTime(newTime);
+                    System.out.println("Time changed!");
+                    System.out.println("Press Enter To Return...");
+                    input.nextLine();
+                    return ;
+
                 case "0":
                     return ;
 
@@ -256,7 +304,7 @@ public class AdminMenuMethods {
             System.out.println("                         Remove Flights                       ");
             System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n");
             if (flightsArrayList.isEmpty()) {
-                System.out.println("No flights added!");
+                System.out.println("There is no added flights!");
             }
 
             else {
@@ -305,10 +353,10 @@ public class AdminMenuMethods {
 
         else {
             System.out.printf("|%-20s|%-13s|%-13s|%-13s|%-6s|%-13s|%-7s|", "FlightId", "Origin", "Destination", "Date", "Time", "Price", "Seats");
-            System.out.println("\n........................................................................................");
+            System.out.println("\n.............................................................................................");
             for (Flights flights : flightsArrayList) {
                 System.out.printf(Locale.US, "|%-20s|%-13s|%-13s|%-13s|%-6s|%,-13d|%-7d|", flights.getFlightId(), flights.getOrigin(), flights.getDestination(), flights.getDate(), flights.getTime(), flights.getPrice(), flights.getSeats());
-                System.out.println("\n........................................................................................");
+                System.out.println("\n.............................................................................................");
             }
         }
 

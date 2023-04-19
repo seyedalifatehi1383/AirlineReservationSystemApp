@@ -48,7 +48,25 @@ public class CheckingEnteredData {
     }
 
 
+//   این متد برای بررسی درستی زمان وارد شده می باشد.
+    public boolean isEnteredTimeRight (String enteredTime) {
+        if (enteredTime.length() != 5) {
+            return false;
+        }
 
-    
+        else {
+            char[] enteredTimeToCharArray = enteredTime.toCharArray();
+            for (int i = 0; i < 5; i++) {
+                if (i == 2) {
+                    continue;
+                }
+                if (!(enteredTimeToCharArray[i] >= '0' && enteredTimeToCharArray[i] <= '9')) {
+                    return false;
+                }
+            }
+
+            return (enteredTimeToCharArray[2] == ':');
+        }
+    }
 }
 
