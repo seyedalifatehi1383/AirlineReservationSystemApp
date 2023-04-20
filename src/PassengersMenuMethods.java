@@ -265,13 +265,15 @@ public class PassengersMenuMethods {
             }
 
             else {
-//                اینجا من اومدم تیکت ایدی رو ایمجورس اسختم که اول یوزرنیم کاربر بعد ایدی پرواز و بعد تعداد صندلی های باقی مونده قبل اینکه کاربر بلیت رزرو کنه و هرکدوم با @ از هم جدا شدن مثال : username@flightId@434)
+//                اینجا من اومدم تیکت ایدی رو ایمجورس اسختم که اول یوزرنیم کاربر بعد ایدی پرواز ، بعد تعداد صندلی های باقی مونده قبل اینکه کاربر بلیت رزرو کنه و در نهایت تعداد دفعات کنسل کردن بلیت و هرکدوم با @ از هم جدا شدن مثال : username@flightId@434@0)
                 String ticketId = "";
                 ticketId = ticketId.concat(passengersArrayList.get(passengerIndex).getUsername());
                 ticketId = ticketId.concat("@");
                 ticketId = ticketId.concat(flightsArrayList.get(flightIndex).getFlightId());
                 ticketId = ticketId.concat("@");
                 ticketId = ticketId.concat(String.valueOf(flightsArrayList.get(flightIndex).getSeats()));
+                ticketId = ticketId.concat("@");
+                ticketId = ticketId.concat(String.valueOf(passengersArrayList.get(passengerIndex).getCountCancelledTickets()));
 
                 int countSeats = flightsArrayList.get(flightIndex).getSeats();
                 countSeats--;
@@ -381,6 +383,10 @@ public class PassengersMenuMethods {
                     int countSeats = ticketsArrayList.get(i).getFlightInfo().getSeats();
                     countSeats++;
                     ticketsArrayList.get(i).getFlightInfo().setSeats(countSeats);
+
+                    int countCancelledSeats = passengersArrayList.get(index).getCountCancelledTickets();
+                    countCancelledSeats++;
+                    passengersArrayList.get(index).setCountCancelledTickets(countCancelledSeats);
 
                     ticketsArrayList.remove(i);
 

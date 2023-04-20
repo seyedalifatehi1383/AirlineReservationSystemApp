@@ -158,7 +158,7 @@ public class Menus {
                 continue;
             }
 
-            Passengers passenger = new Passengers(username, password, 0) ;
+            Passengers passenger = new Passengers(username, password, 0, 0) ;
             passengersArrayList.add(passenger);
             System.out.println("\nSigning up Done!!!");
             System.out.println("Press Enter To Return...");

@@ -1,12 +1,12 @@
-// ابن کلاس برای متد های منوی بروزرسانی قسمت های مختلف پرواز (updateFlightsChangeOptionsMenu) پدید آمده است.
+// ابن کلاس برای متد های منوی بروزرسانی قسمت های مختلف پرواز (updateFlightsChangeOptionsMenu) که در کلاس AdminMenuMethods واقع می باشد، پدید آمده است.
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class UpdateFlightsChangeOptionsMenuMethods {
     Scanner input = new Scanner(System.in);
     CheckingEnteredData checkingEnteredData = new CheckingEnteredData();
+    IsEqualNotCaseSensitiveMethod isEqualNotCaseSensitiveMethod = new IsEqualNotCaseSensitiveMethod();
 
     public void updateFlightId (ArrayList<Flights> flightsArrayList, int index) {
         System.out.print("\033[H\033[2J");
@@ -31,7 +31,7 @@ public class UpdateFlightsChangeOptionsMenuMethods {
             System.out.print(">> ");
             String newOrigin = input.nextLine();
 
-            if (Objects.equals(flightsArrayList.get(index).getDestination(), newOrigin)) {
+            if (isEqualNotCaseSensitiveMethod.isEqualNotCaseSensitive(flightsArrayList.get(index).getDestination(), newOrigin)) {
                 System.out.println("New origin and destination cannot be equals. Please enter another new origin.");
                 System.out.println("Press Enter To Continue...");
                 input.nextLine();
@@ -57,7 +57,7 @@ public class UpdateFlightsChangeOptionsMenuMethods {
             System.out.print(">> ");
             String newDestination = input.nextLine();
 
-            if (Objects.equals(flightsArrayList.get(index).getOrigin(), newDestination)) {
+            if (isEqualNotCaseSensitiveMethod.isEqualNotCaseSensitive(flightsArrayList.get(index).getOrigin(), newDestination)) {
                 System.out.println("New destination and origin cannot be equals. Please enter another new destination.");
                 System.out.println("Press Enter To Continue...");
                 input.nextLine();
@@ -133,7 +133,7 @@ public class UpdateFlightsChangeOptionsMenuMethods {
             System.out.print("Please enter the new price : ");
             String newPrice = input.nextLine();
 
-            if (checkingEnteredData.isEnteredNumberRight(newPrice)) {
+            if (!checkingEnteredData.isEnteredNumberRight(newPrice)) {
                 System.out.println("The entered new price is not right. Please try again!");
                 System.out.println("Press Enter To Continue...");
                 input.nextLine();
@@ -157,7 +157,7 @@ public class UpdateFlightsChangeOptionsMenuMethods {
             System.out.print("Please enter the new count of seats : ");
             String newSeats = input.nextLine();
 
-            if (checkingEnteredData.isEnteredNumberRight(newSeats)) {
+            if (!checkingEnteredData.isEnteredNumberRight(newSeats)) {
                 System.out.println("The entered new count of seats is not right. Please try again!");
                 System.out.println("Press Enter To Continue...");
                 input.nextLine();
