@@ -247,8 +247,7 @@ public class Menus {
                 }
                 case "1" -> passengersMenuMethods.changePassword(passengersArrayList, passengerIndex);
                 case "2" -> passengersMenuMethods.searchFlightTickets(flightsArrayList);
-                case "3" ->
-                        passengersMenuMethods.bookingTicket(flightsArrayList, passengersArrayList, ticketsArrayList, passengerIndex);
+                case "3" -> passengersMenuMethods.bookingTicket(flightsArrayList, passengersArrayList, ticketsArrayList, passengerIndex);
                 case "4" -> passengersMenuMethods.ticketCancellation(passengersArrayList, ticketsArrayList, passengerIndex);
                 case "5" -> passengersMenuMethods.bookedTickets(ticketsArrayList);
                 case "6" -> passengersMenuMethods.addCharge(passengersArrayList, passengerIndex);
