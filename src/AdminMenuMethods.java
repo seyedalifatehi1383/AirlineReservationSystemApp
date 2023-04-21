@@ -278,11 +278,11 @@ public class AdminMenuMethods {
         }
 
         else {
-            System.out.printf("|%-20s|%-13s|%-13s|%-13s|%-6s|%-13s|%-7s|", "FlightId", "Origin", "Destination", "Date", "Time", "Price", "Seats");
-            System.out.println("\n.............................................................................................");
+            System.out.printf("|%-20s|%-13s|%-13s|%-13s|%-9s|%-13s|%-7s|", "FlightId", "Origin", "Destination", "Date", "Time", "Price", "Seats");
+            System.out.println("\n................................................................................................");
             for (Flights flights : flightsArrayList) {
-                System.out.printf(Locale.US, "|%-20s|%-13s|%-13s|%-13s|%-6s|%,-13d|%-7d|", flights.getFlightId(), flights.getOrigin(), flights.getDestination(), flights.getDate(), flights.getTime(), flights.getPrice(), flights.getSeats());
-                System.out.println("\n.............................................................................................");
+                System.out.printf(Locale.US, "|%-20s|%-13s|%-13s|%-13s|%-9s|%,-13d|%-7d|", flights.getFlightId(), flights.getOrigin(), flights.getDestination(), flights.getDate(), flights.getTime(), flights.getPrice(), flights.getSeats());
+                System.out.println("\n................................................................................................");
             }
         }
 

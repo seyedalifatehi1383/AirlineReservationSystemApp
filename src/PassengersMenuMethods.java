@@ -265,7 +265,8 @@ public class PassengersMenuMethods {
             }
 
             else {
-//                اینجا من اومدم تیکت ایدی رو ایمجورس اسختم که اول یوزرنیم کاربر بعد ایدی پرواز ، بعد تعداد صندلی های باقی مونده قبل اینکه کاربر بلیت رزرو کنه و در نهایت تعداد دفعات کنسل کردن بلیت و هرکدوم با @ از هم جدا شدن مثال : username@flightId@434@0)
+//                اینجا من اومدم تیکت ایدی رو اینجوری ساختم که اول یوزرنیم کاربر بعد ایدی پرواز ، بعد تعداد صندلی های باقی مونده قبل اینکه کاربر بلیت رزرو کنه و در نهایت تعداد دفعات کنسل کردن بلیت و هر کدوم با @ از هم جدا شدن مثال : username@flightId@434@0)
+//                درباره تعداد دفعات کنسلی بلیت در کلاس مسافران بالای این ویژگی توضیحاتی داده شده است.
                 String ticketId = "";
                 ticketId = ticketId.concat(passengersArrayList.get(passengerIndex).getUsername());
                 ticketId = ticketId.concat("@");
@@ -322,12 +323,12 @@ public class PassengersMenuMethods {
 //    این متد برای اینه که مسافر یتونه حسابشو شارژ کنه.
     public void addCharge (ArrayList<Passengers> passengersArrayList, int index) {
         while (true) {
-            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-            System.out.println("                              Add Charge                             ");
-            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n");
             System.out.print("\033[H\033[2J");
             System.out.flush();
 
+            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+            System.out.println("                              Add Charge                             ");
+            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n");
             System.out.println("Please enter the amount of charge you want to add to your wallet : ");
             System.out.println("NOTE: If you want to return to the passengers menu, please type \"return\" and then press enter.");
             System.out.print(">> ");
@@ -361,6 +362,13 @@ public class PassengersMenuMethods {
         while (true) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
+
+            if (ticketsArrayList.isEmpty()) {
+                System.out.println("There is no booked tickets for cancelling!");
+                System.out.println("Press Enter To Return...");
+                input.nextLine();
+                return ;
+            }
 
             System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
             System.out.println("                        Ticket Cancellation                        ");
