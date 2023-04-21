@@ -85,14 +85,20 @@ public class PassengersMenuMethods {
             System.out.println("Please enter the wanted filters : ");
             System.out.println("NOTE: If any filter is not important for you, you can type \"ni\" as the wanted filter.");
             System.out.println("NOTE: If you want to return to the passengers menu, you can type \"return\" as the origin then press enter.");
-            System.out.print("Origin : ");
+            System.out.println("\nOrigin : ");
+            System.out.println("NOTE: Searching origins are not case sensitive.");
+            System.out.println("NOTE: Origins and destinations cannot be equals.");
+            System.out.print(">> ");
             String origin = input.nextLine();
 
             if (Objects.equals(origin, "return")) {
                 return ;
             }
 
-            System.out.print("Destination : ");
+            System.out.println("Destination : ");
+            System.out.println("NOTE: Searching destinations are not case sensitive.");
+            System.out.println("NOTE: Origins and destinations cannot be equals.");
+            System.out.print(">> ");
             String destination = input.nextLine();
 
             if (isEqualNotCaseSensitiveMethod.isEqualNotCaseSensitive(origin, destination) && !origin.equals("ni")) {
@@ -102,11 +108,33 @@ public class PassengersMenuMethods {
                 continue;
             }
 
-            System.out.print("Date : ");
+            System.out.println("Date : ");
+            System.out.println("NOTE: The entered date should be like the example: 0000/00/00 or 0000-00-00");
+            System.out.print(">> ");
             String date = input.nextLine();
 
-            System.out.print("Time : ");
+            if (!Objects.equals(date, "ni")) {
+                if (!(checkingEnteredData.isEnteredDateRight(date))) {
+                    System.out.println("The entered date is not correct! Please search again!");
+                    System.out.println("Press Enter To Continue...");
+                    input.nextLine();
+                    continue;
+                }
+            }
+
+            System.out.println("Time : ");
+            System.out.println("NOTE: The entered time should be like the example: 12:10");
+            System.out.print(">> ");
             String time = input.nextLine();
+
+            if (!Objects.equals(time, "ni")) {
+                if (!(checkingEnteredData.isEnteredTimeRight(time))) {
+                    System.out.println("The entered time is not correct! Please search again!");
+                    System.out.println("Press Enter To Continue...");
+                    input.nextLine();
+                    continue;
+                }
+            }
 
             System.out.print("Minimum price : ");
             String minPrice = input.nextLine();
