@@ -302,6 +302,10 @@ public class PassengersMenuMethods {
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
+        System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+        System.out.println("                                         Booked Tickets                                      ");
+        System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n");
+
         if (ticketsArrayList.isEmpty()) {
             System.out.println("There is nothing to see!");
         }

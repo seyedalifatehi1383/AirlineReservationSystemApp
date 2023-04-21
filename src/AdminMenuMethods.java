@@ -273,6 +273,10 @@ public class AdminMenuMethods {
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
+        System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+        System.out.println("                                        Flight Schedules                                    ");
+        System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n");
+
         if (flightsArrayList.isEmpty()) {
             System.out.println("There is nothing to see!");
         }
