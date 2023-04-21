@@ -44,7 +44,7 @@ public class Menus {
 //    این متد برای منوی ورود به سیستم طراحی شده است
     public void signInMenu (ArrayList<Flights> flightsArrayList, ArrayList<Passengers> passengersArrayList) {
         Scanner input = new Scanner(System.in);
-        int index = 0;
+        int passengerIndex = 0;
 
         while (true) {
             System.out.print("\033[H\033[2J");
@@ -64,7 +64,7 @@ public class Menus {
             for (int i = 0; i < passengersArrayList.size(); i++) {
                 if (Objects.equals(passengersArrayList.get(i).getUsername(), username)) {
                     flag = true;
-                    index = i;
+                    passengerIndex = i;
                     break;
                 }
             }
@@ -89,8 +89,8 @@ public class Menus {
 
             else {
                 if (!passengersArrayList.isEmpty() && !Objects.equals(username, "Admin")) {
-                    if (Objects.equals(passengersArrayList.get(index).getPassword(), password)) {
-                        passengersMenu(flightsArrayList, passengersArrayList, index);
+                    if (Objects.equals(passengersArrayList.get(passengerIndex).getPassword(), password)) {
+                        passengersMenu(flightsArrayList, passengersArrayList, passengerIndex);
                     }
 
                     else {
@@ -214,12 +214,12 @@ public class Menus {
 
 
 //    این متد برای "منوی اصلی" قسمت مسافران می باشد.
-    public void passengersMenu (ArrayList<Flights> flightsArrayList, ArrayList<Passengers> passengersArrayList, int index) {
+    public void passengersMenu (ArrayList<Flights> flightsArrayList, ArrayList<Passengers> passengersArrayList, int passengerIndex) {
         PassengersMenuMethods passengersMenuMethods = new PassengersMenuMethods();
 
         ArrayList<Tickets> ticketsArrayList = new ArrayList<>();
-        if (passengersArrayList.get(index).getTickets() != null) {
-            ticketsArrayList = passengersArrayList.get(index).getTickets();
+        if (passengersArrayList.get(passengerIndex).getTickets() != null) {
+            ticketsArrayList = passengersArrayList.get(passengerIndex).getTickets();
         }
 
         while (true) {
@@ -242,16 +242,16 @@ public class Menus {
 
             switch (choose) {
                 case "0" -> {
-                    passengersArrayList.get(index).setTickets(ticketsArrayList);
+                    passengersArrayList.get(passengerIndex).setTickets(ticketsArrayList);
                     return;
                 }
-                case "1" -> passengersMenuMethods.changePassword(passengersArrayList, index);
+                case "1" -> passengersMenuMethods.changePassword(passengersArrayList, passengerIndex);
                 case "2" -> passengersMenuMethods.searchFlightTickets(flightsArrayList);
                 case "3" ->
-                        passengersMenuMethods.bookingTicket(flightsArrayList, passengersArrayList, ticketsArrayList, index);
-                case "4" -> passengersMenuMethods.ticketCancellation(passengersArrayList, ticketsArrayList, index);
+                        passengersMenuMethods.bookingTicket(flightsArrayList, passengersArrayList, ticketsArrayList, passengerIndex);
+                case "4" -> passengersMenuMethods.ticketCancellation(passengersArrayList, ticketsArrayList, passengerIndex);
                 case "5" -> passengersMenuMethods.bookedTickets(ticketsArrayList);
-                case "6" -> passengersMenuMethods.addCharge(passengersArrayList, index);
+                case "6" -> passengersMenuMethods.addCharge(passengersArrayList, passengerIndex);
                 default -> {
                     System.out.println("Please check your command!");
                     System.out.println("Press Enter To Continue...");

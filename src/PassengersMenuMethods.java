@@ -10,7 +10,7 @@ public class PassengersMenuMethods {
     IsEqualNotCaseSensitiveMethod isEqualNotCaseSensitiveMethod = new IsEqualNotCaseSensitiveMethod();
 
 //    این متد برای قسمت تغییر رمز عبور منوی مسافران طراحی شده است
-    public void changePassword (ArrayList<Passengers> passengersArrayList, int index) {
+    public void changePassword (ArrayList<Passengers> passengersArrayList, int passengerIndex) {
         while (true) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
@@ -26,7 +26,7 @@ public class PassengersMenuMethods {
                 return ;
             }
 
-            if (!Objects.equals(previousPassword, passengersArrayList.get(index).getPassword())) {
+            if (!Objects.equals(previousPassword, passengersArrayList.get(passengerIndex).getPassword())) {
                 System.out.println("\nThe entered password is wrong! Please try again!");
                 System.out.println("Press Enter To Continue...");
                 input.nextLine();
@@ -44,14 +44,14 @@ public class PassengersMenuMethods {
             }
 
             else {
-                if (Objects.equals(passengersArrayList.get(index).getPassword(), newPassword)) {
+                if (Objects.equals(passengersArrayList.get(passengerIndex).getPassword(), newPassword)) {
                     System.out.println("\nThis is your previous password. Please try another password!");
                     System.out.println("Press Enter To Continue...");
                     input.nextLine();
                 }
 
                 else {
-                    passengersArrayList.get(index).setPassword(newPassword);
+                    passengersArrayList.get(passengerIndex).setPassword(newPassword);
                     System.out.println("\nPassword changed!");
                     System.out.println("Press Enter To Return...");
                     input.nextLine();
@@ -325,7 +325,7 @@ public class PassengersMenuMethods {
 
 
 //    این متد برای اینه که مسافر یتونه حسابشو شارژ کنه.
-    public void addCharge (ArrayList<Passengers> passengersArrayList, int index) {
+    public void addCharge (ArrayList<Passengers> passengersArrayList, int passengerIndex) {
         while (true) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
@@ -349,9 +349,9 @@ public class PassengersMenuMethods {
                 continue;
             }
 
-            long passengerCharge = passengersArrayList.get(index).getCharge();
+            long passengerCharge = passengersArrayList.get(passengerIndex).getCharge();
             passengerCharge += Integer.parseInt(charge);
-            passengersArrayList.get(index).setCharge(passengerCharge);
+            passengersArrayList.get(passengerIndex).setCharge(passengerCharge);
             System.out.println("\nCharging done!");
             System.out.println("The amount of your charge is : " + passengerCharge);
             System.out.println("Press Enter To Return...");
@@ -362,7 +362,7 @@ public class PassengersMenuMethods {
 
 
 //   این متد برای کنسل کردن بلیت مورد استفاده قرار می گیرد.
-    public void ticketCancellation (ArrayList<Passengers> passengersArrayList, ArrayList<Tickets> ticketsArrayList, int index) {
+    public void ticketCancellation (ArrayList<Passengers> passengersArrayList, ArrayList<Tickets> ticketsArrayList, int passengerIndex) {
         while (true) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
@@ -388,17 +388,17 @@ public class PassengersMenuMethods {
 
             for (int i = 0; i < ticketsArrayList.size(); i++) {
                 if (ticketId.equals(ticketsArrayList.get(i).getTicketId())) {
-                    long passengerCharge = passengersArrayList.get(index).getCharge();
+                    long passengerCharge = passengersArrayList.get(passengerIndex).getCharge();
                     passengerCharge += ticketsArrayList.get(i).getFlightInfo().getPrice();
-                    passengersArrayList.get(index).setCharge(passengerCharge);
+                    passengersArrayList.get(passengerIndex).setCharge(passengerCharge);
 
                     int countSeats = ticketsArrayList.get(i).getFlightInfo().getSeats();
                     countSeats++;
                     ticketsArrayList.get(i).getFlightInfo().setSeats(countSeats);
 
-                    int countCancelledSeats = passengersArrayList.get(index).getCountCancelledTickets();
+                    int countCancelledSeats = passengersArrayList.get(passengerIndex).getCountCancelledTickets();
                     countCancelledSeats++;
-                    passengersArrayList.get(index).setCountCancelledTickets(countCancelledSeats);
+                    passengersArrayList.get(passengerIndex).setCountCancelledTickets(countCancelledSeats);
 
                     ticketsArrayList.remove(i);
 

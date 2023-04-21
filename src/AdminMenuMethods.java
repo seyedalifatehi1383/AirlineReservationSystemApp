@@ -135,11 +135,11 @@ public class AdminMenuMethods {
                 }
 
                 boolean flag = false;
-                int index = 0;
+                int passengerIndex = 0;
                 for (int i = 0; i < flightsArrayList.size(); i++) {
                     if (Objects.equals(flightId, flightsArrayList.get(i).getFlightId())) {
                         flag = true;
-                        index = i;
+                        passengerIndex = i;
                     }
                 }
 
@@ -150,14 +150,14 @@ public class AdminMenuMethods {
                 }
 
                 else {
-                    updateFlightsChangeOptionsMenu(flightsArrayList, index);
+                    updateFlightsChangeOptionsMenu(flightsArrayList, passengerIndex);
                 }
             }
         }
     }
 
 //    این متد برای منوی انتخاب و تغییر اطلاعات پرواز است.
-    public void updateFlightsChangeOptionsMenu (ArrayList<Flights> flightsArrayList, int index) {
+    public void updateFlightsChangeOptionsMenu (ArrayList<Flights> flightsArrayList, int passengerIndex) {
         UpdateFlightsChangeOptionsMenuMethods updateFlightsChangeOptionsMenuMethods = new UpdateFlightsChangeOptionsMenuMethods();
 
         while (true) {
@@ -181,31 +181,31 @@ public class AdminMenuMethods {
 
             switch (select) {
                 case "1":
-                    updateFlightsChangeOptionsMenuMethods.updateFlightId(flightsArrayList, index);
+                    updateFlightsChangeOptionsMenuMethods.updateFlightId(flightsArrayList, passengerIndex);
                     break;
 
                 case "2":
-                    updateFlightsChangeOptionsMenuMethods.updateOrigin(flightsArrayList, index);
+                    updateFlightsChangeOptionsMenuMethods.updateOrigin(flightsArrayList, passengerIndex);
                     break;
 
                 case "3":
-                    updateFlightsChangeOptionsMenuMethods.updateDestination(flightsArrayList, index);
+                    updateFlightsChangeOptionsMenuMethods.updateDestination(flightsArrayList, passengerIndex);
                     break;
 
                 case "4":
-                    updateFlightsChangeOptionsMenuMethods.updateDate(flightsArrayList, index);
+                    updateFlightsChangeOptionsMenuMethods.updateDate(flightsArrayList, passengerIndex);
                     break;
 
                 case "5":
-                    updateFlightsChangeOptionsMenuMethods.updateTIme(flightsArrayList, index);
+                    updateFlightsChangeOptionsMenuMethods.updateTIme(flightsArrayList, passengerIndex);
                     break;
 
                 case "6":
-                    updateFlightsChangeOptionsMenuMethods.updatePrice(flightsArrayList, index);
+                    updateFlightsChangeOptionsMenuMethods.updatePrice(flightsArrayList, passengerIndex);
                     break;
 
                 case "7":
-                    updateFlightsChangeOptionsMenuMethods.updateSeats(flightsArrayList, index);
+                    updateFlightsChangeOptionsMenuMethods.updateSeats(flightsArrayList, passengerIndex);
                     break;
 
                 case "0":
