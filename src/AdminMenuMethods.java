@@ -8,6 +8,7 @@ public class AdminMenuMethods {
     CheckingEnteredData checkingEnteredData = new CheckingEnteredData();
     IsEqualNotCaseSensitiveMethod isEqualNotCaseSensitiveMethod = new IsEqualNotCaseSensitiveMethod();
     Scanner input = new Scanner(System.in);
+    MakeCapitalStringMethod makeCapitalStringMethod = new MakeCapitalStringMethod();
 
 //    این متد برای قسمت اول منوی ادمین (اضافه کردن پرواز ها) زراحی شده است.
     public void addFlights (ArrayList<Flights> flightsArrayList) {
@@ -37,10 +38,12 @@ public class AdminMenuMethods {
             }
 
             System.out.println("Please enter the origin : ");
+            System.out.println("NOTE: Origins are stored with capital letters.");
             System.out.print(">> ");
             String origin = input.nextLine();
             System.out.println("Please enter the destination : ");
             System.out.println("NOTE: Origin and destination cannot be equals.");
+            System.out.println("NOTE: Destinations are stored with capital letters.");
             System.out.print(">> ");
             String destination = input.nextLine();
             if (isEqualNotCaseSensitiveMethod.isEqualNotCaseSensitive(origin, destination)) {
@@ -62,7 +65,7 @@ public class AdminMenuMethods {
                 continue;
             }
 
-            System.out.print("Please enter the time : ");
+            System.out.println("Please enter the time : ");
             System.out.println("NOTE: The entered time should be like the example : 22:22");
             System.out.print(">> ");
             String time = input.nextLine();
@@ -96,7 +99,7 @@ public class AdminMenuMethods {
                 continue;
             }
 
-            Flights flight = new Flights(Integer.parseInt(seats), destination, date, origin, flightId, time, Integer.parseInt(price));
+            Flights flight = new Flights(Integer.parseInt(seats), makeCapitalStringMethod.makeCapitalString(destination), date, makeCapitalStringMethod.makeCapitalString(origin), flightId, time, Integer.parseInt(price));
             flightsArrayList.add(flight);
             System.out.println("Flight added!");
             System.out.println("Press Enter To Return...");
@@ -135,11 +138,11 @@ public class AdminMenuMethods {
                 }
 
                 boolean flag = false;
-                int passengerIndex = 0;
+                int flightIndex = 0;
                 for (int i = 0; i < flightsArrayList.size(); i++) {
                     if (Objects.equals(flightId, flightsArrayList.get(i).getFlightId())) {
                         flag = true;
-                        passengerIndex = i;
+                        flightIndex = i;
                     }
                 }
 
@@ -150,14 +153,14 @@ public class AdminMenuMethods {
                 }
 
                 else {
-                    updateFlightsChangeOptionsMenu(flightsArrayList, passengerIndex);
+                    updateFlightsChangeOptionsMenu(flightsArrayList, flightIndex);
                 }
             }
         }
     }
 
 //    این متد برای منوی انتخاب و تغییر اطلاعات پرواز است.
-    public void updateFlightsChangeOptionsMenu (ArrayList<Flights> flightsArrayList, int passengerIndex) {
+    public void updateFlightsChangeOptionsMenu (ArrayList<Flights> flightsArrayList, int flightIndex) {
         UpdateFlightsChangeOptionsMenuMethods updateFlightsChangeOptionsMenuMethods = new UpdateFlightsChangeOptionsMenuMethods();
 
         while (true) {
@@ -181,31 +184,31 @@ public class AdminMenuMethods {
 
             switch (select) {
                 case "1":
-                    updateFlightsChangeOptionsMenuMethods.updateFlightId(flightsArrayList, passengerIndex);
+                    updateFlightsChangeOptionsMenuMethods.updateFlightId(flightsArrayList, flightIndex);
                     break;
 
                 case "2":
-                    updateFlightsChangeOptionsMenuMethods.updateOrigin(flightsArrayList, passengerIndex);
+                    updateFlightsChangeOptionsMenuMethods.updateOrigin(flightsArrayList, flightIndex);
                     break;
 
                 case "3":
-                    updateFlightsChangeOptionsMenuMethods.updateDestination(flightsArrayList, passengerIndex);
+                    updateFlightsChangeOptionsMenuMethods.updateDestination(flightsArrayList, flightIndex);
                     break;
 
                 case "4":
-                    updateFlightsChangeOptionsMenuMethods.updateDate(flightsArrayList, passengerIndex);
+                    updateFlightsChangeOptionsMenuMethods.updateDate(flightsArrayList, flightIndex);
                     break;
 
                 case "5":
-                    updateFlightsChangeOptionsMenuMethods.updateTIme(flightsArrayList, passengerIndex);
+                    updateFlightsChangeOptionsMenuMethods.updateTIme(flightsArrayList, flightIndex);
                     break;
 
                 case "6":
-                    updateFlightsChangeOptionsMenuMethods.updatePrice(flightsArrayList, passengerIndex);
+                    updateFlightsChangeOptionsMenuMethods.updatePrice(flightsArrayList, flightIndex);
                     break;
 
                 case "7":
-                    updateFlightsChangeOptionsMenuMethods.updateSeats(flightsArrayList, passengerIndex);
+                    updateFlightsChangeOptionsMenuMethods.updateSeats(flightsArrayList, flightIndex);
                     break;
 
                 case "0":

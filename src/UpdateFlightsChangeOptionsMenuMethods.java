@@ -7,38 +7,40 @@ public class UpdateFlightsChangeOptionsMenuMethods {
     Scanner input = new Scanner(System.in);
     CheckingEnteredData checkingEnteredData = new CheckingEnteredData();
     IsEqualNotCaseSensitiveMethod isEqualNotCaseSensitiveMethod = new IsEqualNotCaseSensitiveMethod();
+    MakeCapitalStringMethod makeCapitalStringMethod = new MakeCapitalStringMethod();
 
-    public void updateFlightId (ArrayList<Flights> flightsArrayList, int index) {
+    public void updateFlightId (ArrayList<Flights> flightsArrayList, int flightIndex) {
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
         System.out.print("Please enter the new flightId : ");
         String newFlightId = input.nextLine();
-        flightsArrayList.get(index).setFlightId(newFlightId);
+        flightsArrayList.get(flightIndex).setFlightId(newFlightId);
         System.out.println("FlightId changed!");
         System.out.println("Press Enter To Return...");
         input.nextLine();
     }
 
 
-    public void updateOrigin (ArrayList<Flights> flightsArrayList, int index) {
+    public void updateOrigin (ArrayList<Flights> flightsArrayList, int flightIndex) {
         while (true) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
 
             System.out.println("Please enter the new origin : ");
             System.out.println("NOTE: New origin and destination of the flight cannot be equals.");
+            System.out.println("NOTE: Origins are stored with capital letters.");
             System.out.print(">> ");
             String newOrigin = input.nextLine();
 
-            if (isEqualNotCaseSensitiveMethod.isEqualNotCaseSensitive(flightsArrayList.get(index).getDestination(), newOrigin)) {
+            if (isEqualNotCaseSensitiveMethod.isEqualNotCaseSensitive(flightsArrayList.get(flightIndex).getDestination(), newOrigin)) {
                 System.out.println("New origin and destination cannot be equals. Please enter another new origin.");
                 System.out.println("Press Enter To Continue...");
                 input.nextLine();
                 continue;
             }
 
-            flightsArrayList.get(index).setOrigin(newOrigin);
+            flightsArrayList.get(flightIndex).setOrigin(makeCapitalStringMethod.makeCapitalString(newOrigin));
             System.out.println("Origin changed!");
             System.out.println("Press Enter To Return...");
             input.nextLine();
@@ -47,24 +49,25 @@ public class UpdateFlightsChangeOptionsMenuMethods {
     }
 
 
-    public void updateDestination (ArrayList<Flights> flightsArrayList, int index) {
+    public void updateDestination (ArrayList<Flights> flightsArrayList, int flightIndex) {
         while (true) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
 
             System.out.println("Please enter the new destination : ");
             System.out.println("NOTE: New destination and origin of the flight cannot be equals.");
+            System.out.println("NOTE: Destinations are stored with capital letters.");
             System.out.print(">> ");
             String newDestination = input.nextLine();
 
-            if (isEqualNotCaseSensitiveMethod.isEqualNotCaseSensitive(flightsArrayList.get(index).getOrigin(), newDestination)) {
+            if (isEqualNotCaseSensitiveMethod.isEqualNotCaseSensitive(flightsArrayList.get(flightIndex).getOrigin(), newDestination)) {
                 System.out.println("New destination and origin cannot be equals. Please enter another new destination.");
                 System.out.println("Press Enter To Continue...");
                 input.nextLine();
                 continue;
             }
 
-            flightsArrayList.get(index).setOrigin(newDestination);
+            flightsArrayList.get(flightIndex).setDestination(makeCapitalStringMethod.makeCapitalString(newDestination));
             System.out.println("Destination changed!");
             System.out.println("Press Enter To Return...");
             input.nextLine();
@@ -73,7 +76,7 @@ public class UpdateFlightsChangeOptionsMenuMethods {
     }
 
 
-    public void updateDate (ArrayList<Flights> flightsArrayList, int index) {
+    public void updateDate (ArrayList<Flights> flightsArrayList, int flightIndex) {
         while (true) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
@@ -90,7 +93,7 @@ public class UpdateFlightsChangeOptionsMenuMethods {
                 continue;
             }
 
-            flightsArrayList.get(index).setDate(newDate);
+            flightsArrayList.get(flightIndex).setDate(newDate);
             System.out.println("Date changed!");
             System.out.println("Press Enter To Return...");
             input.nextLine();
@@ -99,7 +102,7 @@ public class UpdateFlightsChangeOptionsMenuMethods {
     }
 
 
-    public void updateTIme (ArrayList<Flights> flightsArrayList, int index) {
+    public void updateTIme (ArrayList<Flights> flightsArrayList, int flightIndex) {
         while (true) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
@@ -116,7 +119,7 @@ public class UpdateFlightsChangeOptionsMenuMethods {
                 continue;
             }
 
-            flightsArrayList.get(index).setTime(newTime);
+            flightsArrayList.get(flightIndex).setTime(newTime);
             System.out.println("Time changed!");
             System.out.println("Press Enter To Return...");
             input.nextLine();
@@ -125,7 +128,7 @@ public class UpdateFlightsChangeOptionsMenuMethods {
     }
 
 
-    public void updatePrice (ArrayList<Flights> flightsArrayList, int index) {
+    public void updatePrice (ArrayList<Flights> flightsArrayList, int flightIndex) {
         while (true) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
@@ -140,7 +143,7 @@ public class UpdateFlightsChangeOptionsMenuMethods {
                 continue;
             }
 
-            flightsArrayList.get(index).setPrice(Integer.parseInt(newPrice));
+            flightsArrayList.get(flightIndex).setPrice(Integer.parseInt(newPrice));
             System.out.println("Price changed!");
             System.out.println("Press Enter To Return...");
             input.nextLine();
@@ -149,7 +152,7 @@ public class UpdateFlightsChangeOptionsMenuMethods {
     }
 
 
-    public void updateSeats (ArrayList<Flights> flightsArrayList, int index) {
+    public void updateSeats (ArrayList<Flights> flightsArrayList, int flightIndex) {
         while (true) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
@@ -164,7 +167,7 @@ public class UpdateFlightsChangeOptionsMenuMethods {
                 continue;
             }
 
-            flightsArrayList.get(index).setSeats(Integer.parseInt(newSeats));
+            flightsArrayList.get(flightIndex).setSeats(Integer.parseInt(newSeats));
             System.out.println("Seats changed!");
             System.out.println("Press Enter To Return...");
             input.nextLine();
