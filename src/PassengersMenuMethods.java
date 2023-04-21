@@ -84,7 +84,7 @@ public class PassengersMenuMethods {
 
             System.out.println("Please enter the wanted filters : ");
             System.out.println("NOTE: If any filter is not important for you, you can type \"ni\" as the wanted filter.");
-            System.out.println("NOTE: If you want to return to the passengers menu, you can type \"return\" as the origin then press enter.");
+            System.out.println("NOTE: If you want to return to the passengers menu, you can type \"return\" as all of the properties then press enter.");
             System.out.println("\nOrigin : ");
             System.out.println("NOTE: Searching origins are not case sensitive.");
             System.out.println("NOTE: Origins and destinations cannot be equals.");
@@ -101,6 +101,10 @@ public class PassengersMenuMethods {
             System.out.print(">> ");
             String destination = input.nextLine();
 
+            if (Objects.equals(destination, "return")) {
+                return ;
+            }
+
             if (isEqualNotCaseSensitiveMethod.isEqualNotCaseSensitive(origin, destination) && !origin.equals("ni")) {
                 System.out.println("Origin and destination cannot be equals. Please search again!");
                 System.out.println("Press Enter To Continue...");
@@ -112,6 +116,10 @@ public class PassengersMenuMethods {
             System.out.println("NOTE: The entered date should be like the example: 0000/00/00 or 0000-00-00");
             System.out.print(">> ");
             String date = input.nextLine();
+
+            if (Objects.equals(date, "return")) {
+                return ;
+            }
 
             if (!Objects.equals(date, "ni")) {
                 if (!(checkingEnteredData.isEnteredDateRight(date))) {
@@ -127,6 +135,10 @@ public class PassengersMenuMethods {
             System.out.print(">> ");
             String time = input.nextLine();
 
+            if (Objects.equals(time, "return")) {
+                return ;
+            }
+
             if (!Objects.equals(time, "ni")) {
                 if (!(checkingEnteredData.isEnteredTimeRight(time))) {
                     System.out.println("The entered time is not correct! Please search again!");
@@ -138,6 +150,11 @@ public class PassengersMenuMethods {
 
             System.out.print("Minimum price : ");
             String minPrice = input.nextLine();
+
+            if (Objects.equals(minPrice, "return")) {
+                return ;
+            }
+
             if (!Objects.equals(minPrice, "ni")) {
                 if (!(checkingEnteredData.isEnteredNumberRight(minPrice))) {
                     System.out.println("The entered minimum price is not correct! Please search again!");
@@ -153,6 +170,11 @@ public class PassengersMenuMethods {
 
             System.out.print("Maximum price : ");
             String maxPrice = input.nextLine();
+
+            if (Objects.equals(maxPrice, "return")) {
+                return ;
+            }
+
             if (!Objects.equals(maxPrice, "ni")) {
                 if (!(checkingEnteredData.isEnteredNumberRight(maxPrice))) {
                     System.out.println("The entered maximum price is not correct! Please search again!");
