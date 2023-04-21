@@ -19,8 +19,8 @@ public class AdminMenuMethods {
             System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
             System.out.println("                          Add Flights                         ");
             System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n");
-            System.out.println("Please enter the flightId : ");
-            System.out.println("NOTE: If you want to return to the previous menu, you can type \"return\" as the flightId and then press enter.");
+            System.out.println("NOTE: If you want to return to the previous menu, you can type \"return\" as all of the properties and then press enter.");
+            System.out.println("\nPlease enter the flightId : ");
             System.out.print(">> ");
             String flightId = input.nextLine();
 
@@ -41,11 +41,21 @@ public class AdminMenuMethods {
             System.out.println("NOTE: Origins are stored with capital letters.");
             System.out.print(">> ");
             String origin = input.nextLine();
+
+            if (Objects.equals(origin, "return")) {
+                return ;
+            }
+
             System.out.println("Please enter the destination : ");
             System.out.println("NOTE: Origin and destination cannot be equals.");
             System.out.println("NOTE: Destinations are stored with capital letters.");
             System.out.print(">> ");
             String destination = input.nextLine();
+
+            if (Objects.equals(destination, "return")) {
+                return ;
+            }
+
             if (isEqualNotCaseSensitiveMethod.isEqualNotCaseSensitive(origin, destination)) {
                 System.out.println("The origin and the destination are same. Please add flight again!");
                 System.out.println("Press Enter To Continue...");
@@ -57,6 +67,10 @@ public class AdminMenuMethods {
             System.out.println("NOTE: The entered date should be like the example : 0000-00-00 or 0000/00/00");
             System.out.print(">> ");
             String date = input.nextLine();
+
+            if (Objects.equals(date, "return")) {
+                return ;
+            }
 
             if (!checkingEnteredData.isEnteredDateRight(date)) {
                 System.out.println("\nYour entered date is wrong! Please add flight again!");
@@ -70,6 +84,10 @@ public class AdminMenuMethods {
             System.out.print(">> ");
             String time = input.nextLine();
 
+            if (Objects.equals(time, "return")) {
+                return ;
+            }
+
             if (!checkingEnteredData.isEnteredTimeRight(time)) {
                 System.out.println("\nYour entered time is wrong! Please add flight again!");
                 System.out.println("Press Enter To Continue...");
@@ -81,6 +99,10 @@ public class AdminMenuMethods {
             System.out.print(">> ");
             String price = input.nextLine();
 
+            if (Objects.equals(price, "return")) {
+                return ;
+            }
+
             if (!checkingEnteredData.isEnteredNumberRight(price)) {
                 System.out.println("\nYour entered price is wrong! Please add flight again!");
                 System.out.println("Press Enter To Continue...");
@@ -91,6 +113,10 @@ public class AdminMenuMethods {
             System.out.println("Please enter the count of the seats : ");
             System.out.print(">> ");
             String seats = input.nextLine();
+
+            if (Objects.equals(seats, "return")) {
+                return ;
+            }
 
             if (!checkingEnteredData.isEnteredNumberRight(seats)) {
                 System.out.println("\nYour entered count of seats is wrong! Please add flight again!");
